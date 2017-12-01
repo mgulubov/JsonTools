@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using JsonTools.Interfaces;
-
-namespace JsonTools.Models
+﻿namespace JsonTools.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Interfaces;
+
     public class JsonNode : IJsonNode
     {
         private IDictionary<string, IJsonValue> innerValuesMap;
@@ -61,32 +61,38 @@ namespace JsonTools.Models
 
         private void ValidateGetValueKey(string key)
         {
-            if (key == null) 
-            {
-                throw new ArgumentNullException("key", "Value can't be null.");
-            }
-
-            if (string.IsNullOrEmpty(key))
-            {
-                throw new ArgumentOutOfRangeException("key", "Value can't be an empty string.");
-            }
-
-            if (!this.KeyExists(key))
-            {
-                throw new KeyNotFoundException("No values found for key: " + key);
-            }
+            this.ValidateKeyIsNotNull(key);
+            this.ValidateKeyIsNotEmpty(key);
+            this.ValidateKeyExists(key);
         }
 
         private void ValidateSetValueKey(string key)
+        {
+            this.ValidateKeyIsNotNull(key);
+            this.ValidateKeyIsNotEmpty(key);
+        }
+
+        private void ValidateKeyIsNotNull(string key)
         {
             if (key == null)
             {
                 throw new ArgumentNullException("key", "Value can't be null.");
             }
+        }
 
+        private void ValidateKeyIsNotEmpty(string key)
+        {
             if (string.IsNullOrEmpty(key))
             {
                 throw new ArgumentOutOfRangeException("key", "Value can't be an empty string.");
+            }
+        }
+
+        private void ValidateKeyExists(string key)
+        {
+            if (!this.KeyExists(key))
+            {
+                throw new KeyNotFoundException("No values found for key: " + key);
             }
         }
     }

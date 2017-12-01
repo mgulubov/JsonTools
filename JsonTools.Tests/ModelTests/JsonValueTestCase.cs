@@ -1,15 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using JsonTools.Interfaces;
-using JsonTools.Models;
-using JsonTools.Tests.Abstract;
-
-namespace JsonTools.Tests.ModelTests
+﻿namespace JsonTools.Tests.ModelTests
 {
+    using System;
+    using System.Text;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Interfaces;
+    using Models;
+    using Tests.Abstract;
+
     [TestClass]
     public class JsonValueTestCase : AbstractJsonValueTestCase
     {
