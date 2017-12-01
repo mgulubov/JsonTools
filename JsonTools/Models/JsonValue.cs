@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using JsonTools.Interfaces;
-
-namespace JsonTools.Models
+﻿namespace JsonTools.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Interfaces;
+
     public class JsonValue : IJsonValue
     {
         public JsonValue(string value)
