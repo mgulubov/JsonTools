@@ -35,17 +35,21 @@ namespace JsonTools.Tests.Abstract
         protected abstract IJsonNode GetJsonNodeInstance(string key);
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void TestStringValueContructorThrowsExceptionOnNullValue()
+        public void TestStringValueContructorNullValue()
         {
             IJsonValue jsonValue = this.GetJsonValueInstance(default(string));
+
+            Assert.IsNull(jsonValue.InnerValue);
+            Assert.IsNull(jsonValue.InnerType);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void TestIJsonNodeCOnstructorThrowsExceptionOnNullValue()
+        public void TestIJsonNodeCOnstructorNullValue()
         {
             IJsonValue jsonValue = this.GetJsonValueInstance(default(IJsonNode));
+
+            Assert.IsNull(jsonValue.InnerValue);
+            Assert.IsNull(jsonValue.InnerType);
         }
 
         [TestMethod]

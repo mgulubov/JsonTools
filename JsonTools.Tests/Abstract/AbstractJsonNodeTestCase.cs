@@ -84,6 +84,42 @@ namespace JsonTools.Tests.Abstract
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestGetValueByKeyThrowsExceptionOnNullKey()
+        {
+            IJsonNode jsonNode = this.GetJsonNodeInstance(null);
+
+            IJsonValue jsonValue = jsonNode[null];
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestGetValueByKeyThrowsExceptionOnEmptyStringKey()
+        {
+            IJsonNode jsonNode = this.GetJsonNodeInstance(null);
+
+            IJsonValue jsonValue = jsonNode[""];
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestSetValueByKeyThrowsExceptionOnNullKey()
+        {
+            IJsonNode jsonNode = this.GetJsonNodeInstance(null);
+
+            jsonNode[null] = this.JsonValueA;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestSetValueByKeyThrowsExceptionOnEmptyStringKey()
+        {
+            IJsonNode jsonNode = this.GetJsonNodeInstance(null);
+
+            jsonNode[""] = this.JsonValueA;
+        }
+
+        [TestMethod]
         public void TestGetSetValueByKey()
         {
             IJsonNode jsonNode = this.GetJsonNodeInstance(this.RootKey);

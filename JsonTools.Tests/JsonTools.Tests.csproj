@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="Abstract\AbstractJsonNodeTestCase.cs" />
     <Compile Include="Abstract\AbstractJsonValueTestCase.cs" />
+    <Compile Include="ModelTests\JsonNodeTestCase.cs" />
+    <Compile Include="ModelTests\JsonValueTestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
