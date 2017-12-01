@@ -9,7 +9,7 @@ namespace JsonTools.Interfaces
     {
         string Key { get; }
 
-        IJsonNode ParentNode { get; }
+        IJsonNode ParentNode { get; set; }
 
         IJsonValue this[string key] { get; set; }
 
