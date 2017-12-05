@@ -10,26 +10,13 @@
     public class JsonValue : IJsonValue
     {
         public JsonValue(string value)
-            : this(value, typeof(string))
-        { }
+        {
+            this.Initialize(value);
+        }
 
         public JsonValue(IJsonNode value)
-            : this(value, typeof(IJsonNode))
-        { }
-
-        public JsonValue(object value)
-            : this(value, typeof(object))
-        { }
-
-        private JsonValue(object innerValue, Type innerType)
         {
-            if (innerValue == null)
-            {
-                innerType = null;
-            }
-
-            this.InnerValue = innerValue;
-            this.InnerType = innerType;
+            this.Initialize(value);
         }
 
         public object InnerValue { get; private set; }
@@ -44,6 +31,52 @@
         public bool IsNode()
         {
             return (this.InnerType != null) && (this.InnerType == typeof(IJsonNode));
+        }
+
+        public bool IsBool()
+        {
+            return (this.InnerType != null) && (this.InnerType == typeof(bool));
+        }
+
+        private void Initialize(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                this.Initialize(default(object), null);
+                return;
+            }
+
+            if (this.StringIsBoolValue(value))
+            {
+                this.Initialize(Convert.ToBoolean(value.Trim().ToLower()), typeof(bool));
+                return;
+            }
+
+            this.Initialize(value, typeof(string));
+        }
+
+        private void Initialize(IJsonNode value)
+        {
+            if (value == default(IJsonNode))
+            {
+                this.Initialize(default(object), null);
+                return;
+            }
+
+            this.Initialize(value, typeof(IJsonNode));
+        }
+
+        private void Initialize(object innerValue, Type innerType)
+        {
+            this.InnerValue = innerValue;
+            this.InnerType = innerType;
+        }
+
+        private bool StringIsBoolValue(string value)
+        {
+            string sanitizedValue = value.Trim().ToLower();
+
+            return (sanitizedValue == "true") || (sanitizedValue == "false");
         }
     }
 }

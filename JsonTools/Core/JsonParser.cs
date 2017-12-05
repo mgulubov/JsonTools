@@ -10,7 +10,7 @@ using JsonTools.Models;
 
 namespace JsonTools.Core
 {
-    public class BasicJsonParser : IJsonParser
+    public class JsonParser : IJsonParser
     {
         StreamReader StreamReader;
 
@@ -19,7 +19,6 @@ namespace JsonTools.Core
             jsonString = this.SanitizeString(jsonString);
             this.SetStreamReader(jsonString);
             IJsonNode rootNode = new JsonNode(null);
-
 
             using (this.StreamReader)
             {

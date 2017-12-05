@@ -13,6 +13,10 @@
 
         bool IsString();
 
+        bool IsInt();
+
         bool IsNode();
+
+        bool IsBool();
     }
 }

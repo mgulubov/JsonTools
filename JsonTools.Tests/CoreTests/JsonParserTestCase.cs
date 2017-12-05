@@ -11,11 +11,11 @@ using JsonTools.Tests.Abstract;
 namespace JsonTools.Tests.CoreTests
 {
     [TestClass]
-    public class BasicJsonParserTestCase : AbstractJsonParserTestCase
+    public class JsonParserTestCase : AbstractJsonParserTestCase
     {
         protected override IJsonParser GetJsonParserInstance()
         {
-            return new BasicJsonParser();
+            return new JsonParser();
         }
     }
 }

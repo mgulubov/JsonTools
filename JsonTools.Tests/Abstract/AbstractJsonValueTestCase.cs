@@ -13,11 +13,17 @@
     {
         protected string StringValueA = "VALUE_A";
         protected string StringValueB = "VALUE_B";
+        protected string StringTrue = "TrUe";
+        protected string StringFalse = "false";
         protected string KeyA = "KEY_A";
         protected string KeyB = "KEY_B";
 
+        protected bool BoolTrue = true;
+        protected bool BoolFalse = false;
+
         protected Type StringType = typeof(string);
         protected Type JsonNodeType = typeof(IJsonNode);
+        protected Type BoolType = typeof(bool);
 
         protected IJsonNode JsonNodeA;
         protected IJsonNode JsonNodeB;
@@ -44,7 +50,7 @@
         }
 
         [TestMethod]
-        public void TestIJsonNodeCOnstructorNullValue()
+        public void TestIJsonNodeIJsonValueConstructorNullValue()
         {
             IJsonValue jsonValue = this.GetJsonValueInstance(default(IJsonNode));
 
@@ -83,6 +89,24 @@
         }
 
         [TestMethod]
+        public void TestInnerValuePropertyBoolTrueValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringTrue);
+
+            Assert.IsNotNull(jsonValue.InnerValue);
+            Assert.AreEqual((object)true, jsonValue.InnerValue);
+        }
+
+        [TestMethod]
+        public void TestInnerValuePropertyBoolFalseValue()
+        {
+            IJsonValue jsonvalue = this.GetJsonValueInstance(this.StringFalse);
+
+            Assert.IsNotNull(jsonvalue.InnerValue);
+            Assert.AreEqual((object)false, jsonvalue.InnerValue);
+        }
+
+        [TestMethod]
         public void TestInnerTypePropertyStringValue()
         {
             IJsonValue jsonValue = this.GetJsonValueInstance(this.StringValueA);
@@ -98,6 +122,24 @@
 
             Assert.IsNotNull(jsonValue.InnerType);
             Assert.AreEqual(this.JsonNodeType, jsonValue.InnerType);
+        }
+
+        [TestMethod]
+        public void TestInnerTypePropertyBoolTrueValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringTrue);
+
+            Assert.IsNotNull(jsonValue.InnerType);
+            Assert.AreEqual(this.BoolType, jsonValue.InnerType);
+        }
+
+        [TestMethod]
+        public void TestInnerTypePropertyBoolFalseValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringFalse);
+
+            Assert.IsNotNull(jsonValue.InnerType);
+            Assert.AreEqual(this.BoolType, jsonValue.InnerType);
         }
 
         [TestMethod]
@@ -118,6 +160,22 @@
         }
 
         [TestMethod]
+        public void TestIsStringMethodReturnsFalseBoolTrueValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringTrue);
+
+            Assert.IsFalse(jsonValue.IsString());
+        }
+
+        [TestMethod]
+        public void TestIsStringMethodReturnsFalseBoolFalseValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringFalse);
+
+            Assert.IsFalse(jsonValue.IsString());
+        }
+
+        [TestMethod]
         public void TestIsNodeMethodReturnsTrueNodeValue()
         {
             IJsonValue jsonValue = this.GetJsonValueInstance(this.JsonNodeA);
@@ -132,6 +190,56 @@
             IJsonValue jsonValue = this.GetJsonValueInstance(this.StringValueA);
 
             Assert.IsFalse(jsonValue.IsNode());
+        }
+
+        [TestMethod]
+        public void TestIsNodeMethodReturnsFalseBoolTrueValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringTrue);
+
+            Assert.IsFalse(jsonValue.IsNode());
+        }
+
+        [TestMethod]
+        public void TestIsNodeMethodReturnsFalseBoolFalseValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringFalse);
+
+            Assert.IsFalse(jsonValue.IsNode());
+        }
+
+        [TestMethod]
+        public void TestIsBoolMethodReturnsTrueBoolTrueValue()
+        {
+            IJsonValue jsonValue = this.GetJsonValueInstance(this.StringTrue);
+
+            Assert.IsTrue(jsonValue.IsBool());
+            Assert.AreEqual<bool>(true, (bool)jsonValue.InnerValue);
+        }
+
+        [TestMethod]
+        public void TestIsBoolMethodReturnsTrueBoolFalseValue()
+        {
+            IJsonValue jsonvalue = this.GetJsonValueInstance(this.StringFalse);
+
+            Assert.IsTrue(jsonvalue.IsBool());
+            Assert.AreEqual<bool>(false, (bool)jsonvalue.InnerValue);
+        }
+
+        [TestMethod]
+        public void TestIsBoolMethodReturnsFalseStringValue()
+        {
+            IJsonValue jsonvalue = this.GetJsonValueInstance(this.StringValueA);
+
+            Assert.IsFalse(jsonvalue.IsBool());
+        }
+
+        [TestMethod]
+        public void TestIsBoolMethodReturnsFalseJsonNodeValue()
+        {
+            IJsonValue jsonvalue = this.GetJsonValueInstance(this.JsonNodeA);
+
+            Assert.IsFalse(jsonvalue.IsBool());
         }
     }
 }
