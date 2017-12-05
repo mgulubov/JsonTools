@@ -45,7 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\BasicJsonParser.cs" />
     <Compile Include="Interfaces\IJsonNode.cs" />
+    <Compile Include="Interfaces\IJsonParser.cs" />
     <Compile Include="Interfaces\IJsonValue.cs" />
     <Compile Include="Models\JsonNode.cs" />
     <Compile Include="Models\JsonValue.cs" />

@@ -46,6 +46,5 @@ namespace JsonTools.Tests.Abstract
             Assert.AreEqual<string>("\\\"You don\'t get it son. This isn\'t a mudhole . . . it\'s an operating table . . . And I\'m the surgeon.\\\"", (string)jsonNode["info"].InnerValue);
             Assert.AreEqual<Type>(typeof(string), jsonNode["info"].InnerType);
         }
-
     }
 }
